@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../fonts/Roboto-Bold.ttf');
+  font-weight: 800;
+  font-weight: bold;
+}
+
+body {
+  overflow-y: hidden;
+}

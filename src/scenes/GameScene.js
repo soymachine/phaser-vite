@@ -62,7 +62,7 @@ class GameScene extends Phaser.Scene
 
         // FPS Text
         this.FPStext = this.add.text(0, 0, "FPS:");
-        this.versionText = this.add.text(0, 0, "V 0.0.1", {align:"right"})
+        this.versionText = this.add.text(0, 0, `v${Constants.version }`, {align:"right"})
         this.versionText.x = Screen.W - this.versionText.width
 
         // Log texts

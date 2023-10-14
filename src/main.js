@@ -1,9 +1,8 @@
-import './style.css'
-import Phaser from 'phaser'
-import GameScene from './src/scenes/GameScene'
-import BackgroundScene from './src/scenes/BackgroundScene'
-import Presentation1 from './src/scenes/Presentation1'
-import Presentation2 from './src/scenes/Presentation2'
+
+import GameScene from './scenes/GameScene.js'
+import BackgroundScene from './scenes/BackgroundScene.js'
+import Presentation1 from './scenes/Presentation1.js'
+import Presentation2 from './scenes/Presentation2.js'
 
 const config = {
   type: Phaser.CANVAS,
