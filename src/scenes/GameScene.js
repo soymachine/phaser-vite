@@ -18,10 +18,10 @@ class GameScene extends Phaser.Scene
         Screen.W = this.scale.gameSize.width
         
         
-        this.load.image('splash', '/public/splash.png');
-        this.load.image('perfume', '/public/perfume.png');
-        this.load.image('bgButton', '/public/buttons/bgButton.png');
-        this.load.image('bg', '/public/background.jpg');
+        this.load.image('splash', '/splash.png');
+        this.load.image('perfume', '/perfume.png');
+        this.load.image('bgButton', '/buttons/bgButton.png');
+        this.load.image('bg', '/background.jpg');
         this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 
         this.lockPortrait()
