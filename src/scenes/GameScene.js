@@ -19,26 +19,28 @@ class GameScene extends Phaser.Scene
     {
         console.log("preload")
         this.firstRunPortrait = (this.scale.orientation == "portrait-primary") ? true: false;
+        this.orientation = this.getScaleOrientation()
         console.log(`[preload] this.firstRunPortrait:${this.firstRunPortrait}`)
         console.log(`[preload] this.scale.orientation:${this.scale.orientation}`)
 
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width
         
-        // Entramos por primera vez en portrait?
-
-       
         this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true)
-
-        this.scale.on("orientationchange", this.onOrientationChange, this);  
-
+        
         this.showDisplayMode()
     }
 
-    onOrientationChange()
+    getScaleOrientation(){
+        let orient
+        (this.scale.orientation == "portrait-primary") ? orient = Constants.PORTRAIT: orient = Constants.LANDSCAPE
+        return orient
+    }
+
+    onOrientationChange2(params)
     {
-        console.log(`[onOrientationChange] this.scale.orientation:${this.scale.orientation}`)
-        this.logger.log(`change orientation:${this.scale.orientation}`)
+        this.orientation = params.orientation
+        console.log(`[onOrientationChange2] newOrientation:${this.orientation}`)
         this.showDisplayMode()
     }
 
@@ -77,12 +79,15 @@ class GameScene extends Phaser.Scene
         
         
         this.gotoNode('Presentation1')
+
+        this.globalevents.subscribe(GlobalEvents.ON_ORIENTATION_CHANGED, (params)=>{this.onOrientationChange2(params)})
     }
 
     showDisplayMode(){
-        if(this.scale.orientation == "landscape-primary"){
+        console.log(`showDisplayMode:${this.orientation}`)
+        if(this.orientation == Constants.LANDSCAPE){
             // Correct
-            //document.getElementById("turn").style.display="none";
+            document.getElementById("turn").style.display="none";
 
             if(this.firstRunPortrait){
                 this.cleanScenes()
@@ -90,12 +95,12 @@ class GameScene extends Phaser.Scene
 
         }else{
             // Incorrect
-            //document.getElementById("turn").style.display="block";
+            document.getElementById("turn").style.display="block";
         }
     }
 
     cleanScenes = ()=>{
-        //console.log("firstRunPortrait, recargamos las escenas")
+        console.log("[cleanScenes]")
         Logger.myInstance = null
         this.scale.off("orientationchange", this.onOrientationChange, this);          
         this.presentation1.scene.restart()
