@@ -8,6 +8,8 @@ import GlobalEvents from './globalevents.js'
 import Constants from './helpers/Constants.js'
 import Orientation from './helpers/Orientation.js'
 
+console.log("Version: " + Constants.version)
+
 const config = {
   type: Phaser.CANVAS,
   backgroundColor: '#000000',

@@ -21,9 +21,10 @@ class GameScene extends Phaser.Scene
         console.log("preload")
         this.orientationHelper = Orientation.getInstance()
         this.firstRunPortrait = (this.orientationHelper.orientation == Constants.PORTRAIT) ? true: false;
-        this.orientation = this.getScaleOrientation()
+        this.orientation = this.orientationHelper.orientation
         console.log(`[preload] this.firstRunPortrait:${this.firstRunPortrait}`)
         console.log(`[preload] this.orientationHelper.orientation:${this.orientationHelper.orientation}`)
+        console.log(`[preload] this.orientation:${this.orientation}`)
 
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width
@@ -33,11 +34,7 @@ class GameScene extends Phaser.Scene
         this.showDisplayMode()
     }
 
-    getScaleOrientation(){
-        let orient
-        (this.scale.orientation == "portrait-primary") ? orient = Constants.PORTRAIT: orient = Constants.LANDSCAPE
-        return orient
-    }
+   
 
     onOrientationChange2(params)
     {

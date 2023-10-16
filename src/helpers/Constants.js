@@ -4,7 +4,7 @@ class Constants
     
 }
 
-Constants.version = "0.0.9";
+Constants.version = "0.1.0";
 Constants.LEFT = "LEFT";
 Constants.RIGHT = "RIGHT";
 Constants.TOP = "TOP";
