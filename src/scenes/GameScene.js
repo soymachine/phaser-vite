@@ -19,6 +19,8 @@ class GameScene extends Phaser.Scene
     {
         console.log("preload")
         this.firstRunPortrait = (this.scale.orientation == "portrait-primary") ? true: false;
+        console.log(`[preload] this.firstRunPortrait:${this.firstRunPortrait}`)
+        console.log(`[preload] this.scale.orientation:${this.scale.orientation}`)
 
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width
@@ -35,7 +37,7 @@ class GameScene extends Phaser.Scene
 
     onOrientationChange()
     {
-        console.log(this.scale.orientation)
+        console.log(`[onOrientationChange] this.scale.orientation:${this.scale.orientation}`)
         this.logger.log(`change orientation:${this.scale.orientation}`)
         this.showDisplayMode()
     }
@@ -80,7 +82,7 @@ class GameScene extends Phaser.Scene
     showDisplayMode(){
         if(this.scale.orientation == "landscape-primary"){
             // Correct
-            document.getElementById("turn").style.display="none";
+            //document.getElementById("turn").style.display="none";
 
             if(this.firstRunPortrait){
                 this.cleanScenes()
@@ -88,14 +90,14 @@ class GameScene extends Phaser.Scene
 
         }else{
             // Incorrect
-            document.getElementById("turn").style.display="block";
+            //document.getElementById("turn").style.display="block";
         }
     }
 
     cleanScenes = ()=>{
         //console.log("firstRunPortrait, recargamos las escenas")
         Logger.myInstance = null
-        this.scale.off("orientationchange", this.onOrientationChange, this);  
+        this.scale.off("orientationchange", this.onOrientationChange, this);          
         this.presentation1.scene.restart()
         this.backgroundScene.scene.restart()
         this.scene.restart("GameScene")

@@ -10,7 +10,7 @@ class Logger {
     log(str){
         this.logs.unshift(this.getNum() + " " + str)
         //console.log(`join en logger es ${this.logs.join("\n")}`)
-        console.log(this.label)
+        //console.log(this.label)
         this.label.text = this.logs.join("\n")
     }
     
