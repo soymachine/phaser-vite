@@ -22,7 +22,7 @@ class Presentation1 extends Section
         this.perfume.name = "perfume"
         
         this.view.add(this.perfume);
-        console.log(`this.perfume:${this.perfume.displayWidth} this.sectionH:${this.sectionH}`)
+        // console.log(`this.perfume:${this.perfume.displayWidth} this.sectionH:${this.sectionH}`)
 
         this.scaleImage({
             img: this.perfume, 

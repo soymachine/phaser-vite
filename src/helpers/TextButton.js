@@ -24,7 +24,7 @@ class TextButton
             //origin: {x: 0.5, y: 0.5},
             add: true
         });
-        console.log(this.image)
+        //console.log(this.image)
         //this.image.setTintFill(buttonColor);
 
         this.text = game.add.rexBBCodeText(0, 0, text, { fontFamily, fontSize, color }).setInteractive();

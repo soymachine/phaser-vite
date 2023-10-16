@@ -35,7 +35,7 @@ class BackgroundScene extends Phaser.Scene
     }
 
     onChange = (positionResult)=>{
-        console.log(`nos hemos de mover a ${positionResult}`)
+        //console.log(`nos hemos de mover a ${positionResult}`)
         // movemos el background según este cambio
         
         switch(positionResult){
@@ -65,12 +65,6 @@ class BackgroundScene extends Phaser.Scene
         });
     }
 
-    create ()
-    {
-        console.log(`create bg`)
-        const width = this.scale.gameSize.width;
-        const height = this.scale.gameSize.height;
-    }
     
 }
 

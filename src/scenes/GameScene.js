@@ -2,61 +2,47 @@ import BackgroundScene from './BackgroundScene.js';
 import Screen from '../helpers/Screen.js';
 import Constants from '../helpers/Constants.js';
 import GlobalEvents from '../globalevents.js';
+import Logger from '../helpers/Logger.js';
 
 class GameScene extends Phaser.Scene
 {
     constructor ()
     {
-        super('GameScene');
+        super({
+            key:'GameScene',
+            active:true
+        });    
         
     }
 
     preload ()
     {
-        this.logs = []
+        console.log("preload")
+        this.firstRunPortrait = (this.scale.orientation == "portrait-primary") ? true: false;
+
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width
         
         // Entramos por primera vez en portrait?
-        this.firstRunPortrait = this.scale.orientation == "portrait-primary"? true: false;
 
-        this.load.image('splash', '/splash.png')
-        this.load.image('perfume', '/perfume.png')
-        this.load.image('bgButton', '/buttons/bgButton.png')
-        this.load.image('bg', '/background.jpg')
+       
         this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true)
 
-        this.scale.on("orientationchange", (gameSize, baseSize, displaySize, resolution) => {
-            console.log(this.scale.orientation)
-            this.showDisplayMode()
-        });
+        this.scale.on("orientationchange", this.onOrientationChange, this);  
 
         this.showDisplayMode()
     }
 
-    showDisplayMode(){
-        if(this.scale.orientation == "landscape-primary"){
-            // Correct
-            document.getElementById("turn").style.display="none";
-
-            if(this.firstRunPortrait){
-                console.log(this)
-                this.presentation1.scene.restart()
-                this.backgroundScene.scene.restart()
-                this.scene.restart("GameScene")
-                
-            }
-
-        }else{
-            // Incorrect
-            document.getElementById("turn").style.display="block";
-        }
+    onOrientationChange()
+    {
+        console.log(this.scale.orientation)
+        this.logger.log(`change orientation:${this.scale.orientation}`)
+        this.showDisplayMode()
     }
 
     create ()
     {
-        this.globalevents = GlobalEvents.getInstance()
-        
+        console.log("create")
         this.sections = []
         this.currentNode = undefined
 
@@ -81,18 +67,38 @@ class GameScene extends Phaser.Scene
         this.logText = this.add.text(0, 0, "", {align:"left"})
         this.logText.y = 30
 
-        // this.add.image(400, 300, 'sky');
-        //this.star = this.add.image(400, 300, 'star').setInteractive()
-        //this.star.name = "star"
+        this.globalevents = GlobalEvents.getInstance()
+        this.logger = Logger.getInstance({
+            text:this.logText
+        })
+        this.logger.log(`firstRunPortrait:${this.firstRunPortrait}`)
         
-        /*
-        this.input.on('gameobjectdown', (pointer, button) =>
-        {
-            console.log(`button.name:${button.name}`)
-        });
-        */
         
         this.gotoNode('Presentation1')
+    }
+
+    showDisplayMode(){
+        if(this.scale.orientation == "landscape-primary"){
+            // Correct
+            document.getElementById("turn").style.display="none";
+
+            if(this.firstRunPortrait){
+                this.cleanScenes()
+            }
+
+        }else{
+            // Incorrect
+            document.getElementById("turn").style.display="block";
+        }
+    }
+
+    cleanScenes = ()=>{
+        //console.log("firstRunPortrait, recargamos las escenas")
+        Logger.myInstance = null
+        this.scale.off("orientationchange", this.onOrientationChange, this);  
+        this.presentation1.scene.restart()
+        this.backgroundScene.scene.restart()
+        this.scene.restart("GameScene")
     }
 
     addSection = ({section, position})=> {
@@ -147,7 +153,7 @@ class GameScene extends Phaser.Scene
 
         // Enviamos evento de que hemos movido nodos
         
-        console.log(nextNode)
+        //console.log(nextNode)
 
         this.globalevents.notify(GlobalEvents.ON_NODE_CHANGE, this.reversePosition(nextNode.getPosition()));
 
@@ -175,9 +181,7 @@ class GameScene extends Phaser.Scene
         var loop = this.sys.game.loop;
     
         this.FPStext.text = `FPS:${loop.actualFps}`;
-
-        // Logs
-        this.logText.text = this.logs.join("\n")
+        
     }
 
     getOutPosition = (positionPush, currentNodeID)=>{
