@@ -3,6 +3,7 @@ import Screen from '../helpers/Screen.js';
 import Constants from '../helpers/Constants.js';
 import GlobalEvents from '../globalevents.js';
 import Logger from '../helpers/Logger.js';
+import Orientation from '../helpers/Orientation.js';
 
 class GameScene extends Phaser.Scene
 {
@@ -18,10 +19,11 @@ class GameScene extends Phaser.Scene
     preload ()
     {
         console.log("preload")
-        this.firstRunPortrait = (this.scale.orientation == "portrait-primary") ? true: false;
+        this.orientationHelper = Orientation.getInstance()
+        this.firstRunPortrait = (this.orientationHelper.orientation == Constants.PORTRAIT) ? true: false;
         this.orientation = this.getScaleOrientation()
         console.log(`[preload] this.firstRunPortrait:${this.firstRunPortrait}`)
-        console.log(`[preload] this.scale.orientation:${this.scale.orientation}`)
+        console.log(`[preload] this.orientationHelper.orientation:${this.orientationHelper.orientation}`)
 
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width

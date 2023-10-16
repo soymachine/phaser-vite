@@ -6,6 +6,7 @@ import Presentation2 from './scenes/Presentation2.js'
 import PreloadScene from './scenes/PreloadScene.js'
 import GlobalEvents from './globalevents.js'
 import Constants from './helpers/Constants.js'
+import Orientation from './helpers/Orientation.js'
 
 const config = {
   type: Phaser.CANVAS,
@@ -21,21 +22,7 @@ const config = {
 };
 
 
-const globalevents = GlobalEvents.getInstance()
-
-window.onresize = function (){
-  if(window.innerWidth > window.innerHeight){
-    // landscape
-    console.log("window.onresize LANDSCAPE detected")
-    globalevents.notify(GlobalEvents.ON_ORIENTATION_CHANGED, {orientation:Constants.LANDSCAPE});
-  }
-  else{
-    // portrait
-    console.log("window.onresize PORTRAIT detected")
-
-    globalevents.notify(GlobalEvents.ON_ORIENTATION_CHANGED, {orientation:Constants.PORTRAIT});
-  }
-};
+Orientation.getInstance()
 
 const game = new Phaser.Game(config);
 
