@@ -10,7 +10,7 @@ class GameScene extends Phaser.Scene
     {
         super({
             key:'GameScene',
-            active:true
+            active:false
         });    
         
     }

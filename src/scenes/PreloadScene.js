@@ -18,7 +18,8 @@ class PreloadScene extends Phaser.Scene
     create ()
     {
         console.log("Preloaded finished")
-        this.gameScene = this.scene.get('GameScene')
+        // this.gameScene = this.scene.get('GameScene')
+        this.scene.switch("GameScene")
 
     }
 
