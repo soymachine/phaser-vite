@@ -24,21 +24,23 @@ class GameScene extends Phaser.Scene
         this.load.image('bg', '/background.jpg');
         this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 
-        this.lockPortrait()
+        this.scale.on("orientationchange", (gameSize, baseSize, displaySize, resolution) => {
+            console.log(this.scale.orientation)
+            this.showDisplayMode()
+        });
+
+        this.showDisplayMode()
     }
 
-    lockPortrait(){
-        screen.orientation
-        .lock("landscape")
-        .then(() => {
-            console.log("locked success")
-            this.logs.push("locked success")
-            
-        })
-        .catch((error) => {
-            console.log(`locked error:${error}`)
-            this.logs.push(`locked error:${error}`)
-        });
+    showDisplayMode(){
+        if(this.scale.orientation == "landscape-primary"){
+            // Correct
+            document.getElementById("turn").style.display="none";
+        }else{
+            // Incorrect
+            console.log("Incorrect")
+            document.getElementById("turn").style.display="block";
+        }
     }
 
     create ()

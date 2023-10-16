@@ -18,3 +18,23 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+
+/*
+game.scale.forceOrientation(true, false);
+game.scale.enterIncorrectOrientation.add(handleIncorrect);
+game.scale.leaveIncorrectOrientation.add(handleCorrect);
+
+function handleIncorrect(){
+  console.log("handleIncorrect")
+  if(!game.device.desktop){
+    document.getElementById("turn").style.display="block";
+  }
+}
+
+function handleCorrect(){
+  console.log("handleCorrect")
+  if(!game.device.desktop){
+    document.getElementById("turn").style.display="none";
+  }
+}
+*/
