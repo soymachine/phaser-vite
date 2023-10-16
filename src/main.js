@@ -26,10 +26,13 @@ const globalevents = GlobalEvents.getInstance()
 window.onresize = function (){
   if(window.innerWidth > window.innerHeight){
     // landscape
+    console.log("window.onresize LANDSCAPE detected")
     globalevents.notify(GlobalEvents.ON_ORIENTATION_CHANGED, {orientation:Constants.LANDSCAPE});
   }
   else{
     // portrait
+    console.log("window.onresize PORTRAIT detected")
+
     globalevents.notify(GlobalEvents.ON_ORIENTATION_CHANGED, {orientation:Constants.PORTRAIT});
   }
 };
