@@ -17,12 +17,14 @@ class GameScene extends Phaser.Scene
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width
         
-        
-        this.load.image('splash', '/splash.png');
-        this.load.image('perfume', '/perfume.png');
-        this.load.image('bgButton', '/buttons/bgButton.png');
-        this.load.image('bg', '/background.jpg');
-        this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
+        // Entramos por primera vez en portrait?
+        this.firstRunPortrait = this.scale.orientation == "portrait-primary"? true: false;
+
+        this.load.image('splash', '/splash.png')
+        this.load.image('perfume', '/perfume.png')
+        this.load.image('bgButton', '/buttons/bgButton.png')
+        this.load.image('bg', '/background.jpg')
+        this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true)
 
         this.scale.on("orientationchange", (gameSize, baseSize, displaySize, resolution) => {
             console.log(this.scale.orientation)
@@ -36,9 +38,17 @@ class GameScene extends Phaser.Scene
         if(this.scale.orientation == "landscape-primary"){
             // Correct
             document.getElementById("turn").style.display="none";
+
+            if(this.firstRunPortrait){
+                console.log(this)
+                this.presentation1.scene.restart()
+                this.backgroundScene.scene.restart()
+                this.scene.restart("GameScene")
+                
+            }
+
         }else{
             // Incorrect
-            console.log("Incorrect")
             document.getElementById("turn").style.display="block";
         }
     }
