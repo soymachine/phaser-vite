@@ -4,6 +4,7 @@ import Constants from '../helpers/Constants.js';
 import GlobalEvents from '../globalevents.js';
 import Logger from '../helpers/Logger.js';
 import Orientation from '../helpers/Orientation.js';
+import {setText} from '../helpers/TextHelper.js'
 
 class GameScene extends Phaser.Scene
 {
@@ -76,10 +77,50 @@ class GameScene extends Phaser.Scene
         })
         this.logger.log(`firstRunPortrait:${this.firstRunPortrait}`)
         
-        
-        this.gotoNode('Presentation1')
+        // Ojo, esto descomentado!!
+        // this.gotoNode('Presentation1')
 
         this.globalevents.subscribe(GlobalEvents.ON_ORIENTATION_CHANGED, (params)=>{this.onOrientationChange2(params)})
+
+
+        // TESTING
+        this.testImg = this.add.image(0, 0, 'image_2').setOrigin(0, 0)
+        const x = (Screen.W * .5) - (this.testImg.width * .5)
+        const y = (Screen.H * .5) - (this.testImg.height * .5)
+        console.log(`this.testImg.width:${this.testImg.width}`)
+        this.testImg.x = x
+        this.testImg.y = y
+
+        // Left Button
+        this.leftButton = this.add.image(0, 0, 'goBack_button').setOrigin(0, 0)
+        this.rightButton = this.add.image(0, 0, 'continue_button').setOrigin(0, 0)
+        
+        const offset = 62
+        this.leftButton.x = offset
+        this.leftButton.y = Screen.H - this.leftButton.height - offset
+
+        this.rightButton.x = Screen.W - this.rightButton.width - offset
+        this.rightButton.y = Screen.H - this.rightButton.height - offset
+
+        
+        var style = { font: "bold 32px Arial", fill: "#fff"};
+        
+        
+        //this.presentationText = this.add.rexBBCodeText(0, 0, 'She logs onto a website and sees the first selection step', { fontFamily: 'Arial', fontSize: 50, color: '#FFFFFF' });
+        const maxW = 735
+        this.presentationText =  this.add.text(0, 0, 'She logs onto a website and sees the first selection step', {
+            fixedWidth: maxW,
+            fontSize: '50px',
+            fontFamily: 'Arial',
+            align: 'center',
+            wordWrap: {
+                width: maxW,
+                useAdvancedWrap: true
+            },
+        })
+        
+        this.presentationText.x = Screen.W * .5 - (this.presentationText.width * .5)
+        this.presentationText.y = Screen.H - (this.presentationText.height) - offset
     }
 
     showDisplayMode(){

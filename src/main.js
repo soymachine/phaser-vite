@@ -10,14 +10,28 @@ import Orientation from './helpers/Orientation.js'
 
 console.log("Version: " + Constants.version)
 
+const innerWidth = window.innerWidth
+const innerHeight = window.innerHeight
+const h = 1080
+const w = h * (innerWidth / innerHeight)
+
+console.log(`w:${w} h:${h}`)
+
 const config = {
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   backgroundColor: '#000000',
   scale: {
-      mode: Phaser.Scale.RESIZE,
+      mode: Phaser.Scale.NO_SCALE, // RESIZE  Phaser.Scale.RESIZE/ NO_SCALE
       parent: 'phaser-example',
+      //*
+      width: w,
+      height: h,
+      //*/
+      
+      /*
       width: window.innerWidth,
       height: window.innerHeight,
+      */
   }, // , BackgroundScene, Presentation2
   scene: [PreloadScene, GameScene, BackgroundScene, Presentation1, Presentation2 ], // , BackgroundScene, Presentation2
 
