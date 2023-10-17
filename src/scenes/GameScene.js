@@ -29,18 +29,17 @@ class GameScene extends Phaser.Scene
 
         Screen.H = this.scale.gameSize.height
         Screen.W = this.scale.gameSize.width
+        console.log(Screen.W + " " + Screen.H)
         
         this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true)
         
         this.showDisplayMode()
     }
 
-   
-
     onOrientationChange2(params)
     {
         this.orientation = params.orientation
-        console.log(`[onOrientationChange2] newOrientation:${this.orientation}`)
+        //console.log(`[onOrientationChange2] newOrientation:${this.orientation}`)
         this.showDisplayMode()
     }
 
@@ -60,36 +59,23 @@ class GameScene extends Phaser.Scene
         this.backgroundScene = this.scene.get('BackgroundScene')
         this.backgroundScene.start(this)        
         
-        // console.log(`w:${this.scale.gameSize.width} h:${this.scale.gameSize.height}`)
-
-        // FPS Text
-        this.FPStext = this.add.text(0, 0, "FPS:");
-        this.versionText = this.add.text(0, 0, `v${Constants.version }`, {align:"right"})
-        this.versionText.x = Screen.W - this.versionText.width
-
-        // Log texts
-        this.logText = this.add.text(0, 0, "", {align:"left"})
-        this.logText.y = 30
-
         this.globalevents = GlobalEvents.getInstance()
-        this.logger = Logger.getInstance({
-            text:this.logText
-        })
-        this.logger.log(`firstRunPortrait:${this.firstRunPortrait}`)
+        
         
         // Ojo, esto descomentado!!
         // this.gotoNode('Presentation1')
 
         this.globalevents.subscribe(GlobalEvents.ON_ORIENTATION_CHANGED, (params)=>{this.onOrientationChange2(params)})
 
-
         // TESTING
         this.testImg = this.add.image(0, 0, 'image_2').setOrigin(0, 0)
+        
         const x = (Screen.W * .5) - (this.testImg.width * .5)
         const y = (Screen.H * .5) - (this.testImg.height * .5)
         console.log(`this.testImg.width:${this.testImg.width}`)
         this.testImg.x = x
         this.testImg.y = y
+        Screen.fitToScreen(this.testImg)
 
         // Left Button
         this.leftButton = this.add.image(0, 0, 'goBack_button').setOrigin(0, 0)
@@ -121,6 +107,18 @@ class GameScene extends Phaser.Scene
         
         this.presentationText.x = Screen.W * .5 - (this.presentationText.width * .5)
         this.presentationText.y = Screen.H - (this.presentationText.height) - offset
+
+        // Log texts
+        this.logText = this.add.text(0, 0, "", {align:"left", fontSize:30})
+        this.logger = Logger.getInstance({
+            text:this.logText
+        })
+        this.logger.log(`innerWidth:${window.innerWidth} innerHeight:${window.innerHeight}`)
+        this.logger.log(`prop:${window.innerWidth / window.innerHeight}`)
+        this.logger.log(`Screen.W:${Screen.W} Screen-H:${Screen.H}`)
+
+        this.versionText = this.add.text(0, 0, `v${Constants.version }`, {align:"right", fontSize:30})
+        this.versionText.x = Screen.W - this.versionText.width
     }
 
     showDisplayMode(){
@@ -228,7 +226,7 @@ class GameScene extends Phaser.Scene
     {
         var loop = this.sys.game.loop;
     
-        this.FPStext.text = `FPS:${loop.actualFps}`;
+        //this.FPStext.text = `FPS:${loop.actualFps}`;
         
     }
 

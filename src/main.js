@@ -12,8 +12,17 @@ console.log("Version: " + Constants.version)
 
 const innerWidth = window.innerWidth
 const innerHeight = window.innerHeight
-const h = 1080
-const w = h * (innerWidth / innerHeight)
+console.log(`innerWidth:${innerWidth} innerHeight:${innerHeight}`)
+
+let h = 1080
+let w = h * (innerWidth / innerHeight)
+// Si queremos LANDSCALE only tenemos que invertir los valores si el alto > ancho
+if(innerHeight > innerWidth){
+  w = h * (innerHeight / innerWidth)
+}
+
+
+
 
 console.log(`w:${w} h:${h}`)
 

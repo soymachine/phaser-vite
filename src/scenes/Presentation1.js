@@ -34,8 +34,8 @@ class Presentation1 extends Section
 
 
         // Texto
-        this.presentationText = this.add.rexBBCodeText(0, 0, 'PRESENTACIÓN [b]TÍTULO[/b]', { fontFamily: '"Roboto", "Roboto-Bold", serif', fontSize: 0, color: '#5656ee' });
-        this.centerIMG(this.presentationText)
+        //this.presentationText = this.add.rexBBCodeText(0, 0, 'PRESENTACIÓN [b]TÍTULO[/b]', { fontFamily: '"Roboto", "Roboto-Bold", serif', fontSize: 0, color: '#5656ee' });
+        //this.centerIMG(this.presentationText)
 
         this.textButton = new TextButton({
             game:this.game,
