@@ -144,13 +144,15 @@ class GameScene extends Phaser.Scene
     }
 
     cleanScenes = ()=>{
-        console.log("[cleanScenes]")
+        window.location.reload()
+        /*
         Logger.myInstance = null
         this.globalevents.unsubscribe(GlobalEvents.ON_ORIENTATION_CHANGED, (params)=>{this.onOrientationChange2(params)})
         this.scale.off("orientationchange", this.onOrientationChange, this);          
         this.presentation1.scene.restart()
         this.backgroundScene.scene.restart()
         this.scene.restart("GameScene")
+        */
     }
 
     addSection = ({section, position})=> {

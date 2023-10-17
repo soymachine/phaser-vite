@@ -29,6 +29,7 @@ console.log(`w:${w} h:${h}`)
 const config = {
   type: Phaser.CANVAS,
   backgroundColor: '#000000',
+  antialiasGL: false,
   scale: {
       mode: Phaser.Scale.NO_SCALE, // RESIZE  Phaser.Scale.RESIZE/ NO_SCALE
       parent: 'content',
