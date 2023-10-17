@@ -2,14 +2,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimal-ui, viewport-fit=cover" />
     <script src="//cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
     <script type="module" src="/src/main.js"></script>
     <link rel="stylesheet" href="/public/css/style.css">
     
     <style type="text/css">
       body {
-          margin: 0;
+        margin: 0;
+        min-height: 100vh;
+        /* mobile viewport bug fix */
+        min-height: -webkit-fill-available;
+      }
+
+      html {
+        height: -webkit-fill-available;
       }
 
       #turn{
@@ -24,6 +31,9 @@
 				background-position: center center;
 				display:none;
 			}
+
+      div.spacer { height: 1px; }
+      div.content { height: 100%; }
   </style>
     <title>PHASER</title>
   </head>
@@ -31,5 +41,7 @@
     <div style="font-family:'Roboto'; position: absolute; left:-1000px; visibility:hidden;">.</div>
     <div style="font-family:'Roboto-Bold'; position: absolute; left:-1000px; visibility:hidden;">.</div>
     <div id = "turn"></div>
+    <div class = "content" id="content"></div>
+    <div class = "spacer"></div>
   </body>
 </html>

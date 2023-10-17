@@ -48,7 +48,7 @@ class GameScene extends Phaser.Scene
         console.log("create")
         this.sections = []
         this.currentNode = undefined
-
+        this.safeArea = 20
         // SECTIONS
         this.presentation1 = this.scene.get('Presentation1')
         this.addSection({
@@ -110,6 +110,7 @@ class GameScene extends Phaser.Scene
 
         // Log texts
         this.logText = this.add.text(0, 0, "", {align:"left", fontSize:30})
+        this.logText.x = this.safeArea
         this.logger = Logger.getInstance({
             text:this.logText
         })
@@ -118,7 +119,12 @@ class GameScene extends Phaser.Scene
         this.logger.log(`Screen.W:${Screen.W} Screen-H:${Screen.H}`)
 
         this.versionText = this.add.text(0, 0, `v${Constants.version }`, {align:"right", fontSize:30})
-        this.versionText.x = Screen.W - this.versionText.width
+        this.versionText.x = Screen.W - (this.versionText.width) - this.safeArea
+
+        this.dimensions = this.add.text(0, 0, `ddsdasdsdasdsadsda`, {align:"right", fontSize:30})
+        this.dimensions.y = 200
+        this.dimensions.setText(`window.innerWidth:${window.innerWidth} window.innerHeight${window.innerHeight}`)
+        this.dimensions.x = (Screen.W * .5) - (this.dimensions.width  * .5)
     }
 
     showDisplayMode(){
@@ -227,7 +233,8 @@ class GameScene extends Phaser.Scene
         var loop = this.sys.game.loop;
     
         //this.FPStext.text = `FPS:${loop.actualFps}`;
-        
+        this.dimensions.setText(`window.innerWidth:${window.innerWidth} window.innerHeight${window.innerHeight}`)
+        this.dimensions.x = (Screen.W * .5) - (this.dimensions.width  * .5)
     }
 
     getOutPosition = (positionPush, currentNodeID)=>{

@@ -31,7 +31,7 @@ const config = {
   backgroundColor: '#000000',
   scale: {
       mode: Phaser.Scale.NO_SCALE, // RESIZE  Phaser.Scale.RESIZE/ NO_SCALE
-      parent: 'phaser-example',
+      parent: 'content',
       //*
       width: w,
       height: h,
