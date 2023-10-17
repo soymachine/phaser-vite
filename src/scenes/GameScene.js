@@ -111,6 +111,7 @@ class GameScene extends Phaser.Scene
         // Log texts
         this.logText = this.add.text(0, 0, "", {align:"left", fontSize:30})
         this.logText.x = this.safeArea
+        this.logText.y = 20
         this.logger = Logger.getInstance({
             text:this.logText
         })
@@ -120,6 +121,7 @@ class GameScene extends Phaser.Scene
 
         this.versionText = this.add.text(0, 0, `v${Constants.version }`, {align:"right", fontSize:30})
         this.versionText.x = Screen.W - (this.versionText.width) - this.safeArea
+        this.versionText.y = 10
 
         this.dimensions = this.add.text(0, 0, `ddsdasdsdasdsadsda`, {align:"right", fontSize:30})
         this.dimensions.y = 200
