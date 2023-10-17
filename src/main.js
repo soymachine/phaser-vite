@@ -11,7 +11,7 @@ import Orientation from './helpers/Orientation.js'
 console.log("Version: " + Constants.version)
 
 const config = {
-  type: Phaser.CANVAS,
+  type: Phaser.AUTO,
   backgroundColor: '#000000',
   scale: {
       mode: Phaser.Scale.RESIZE,
