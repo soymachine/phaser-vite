@@ -1,4 +1,4 @@
-import GlobalEvents from '../globalevents.js'
+import GlobalEvents from '../core/GlobalEvents.js'
 import Constants from '../helpers/Constants.js'
 
 class Orientation {

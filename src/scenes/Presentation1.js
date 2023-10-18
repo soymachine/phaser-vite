@@ -2,7 +2,7 @@ import Section  from './Section.js'
 import TextButton  from '../helpers/TextButton.js'
 import Constants  from '../helpers/Constants.js'
 import Screen  from '../helpers/Screen.js'
-import GlobalEvents from '../globalevents.js';
+import GlobalEvents from '../core/GlobalEvents.js';
 
 
 class Presentation1 extends Section
@@ -13,69 +13,46 @@ class Presentation1 extends Section
     }
 
     start ({game, position}){
+        
+        const that = this
+        
         super.create({
             position: position
         })
 
         this.game = game
-        this.perfume = this.game.add.image(0, 0, 'perfume').setOrigin(0, 0).setInteractive();
+        this.perfume = this.game.add.image(0, 0, 'perfume').setOrigin(0, 0)
         this.perfume.name = "perfume"
         
         this.view.add(this.perfume);
-        // console.log(`this.perfume:${this.perfume.displayWidth} this.sectionH:${this.sectionH}`)
-
+        
         this.scaleImage({
             img: this.perfume, 
             type:"pixels",
             value: this.sectionH * .7,
             side: "height"
         })
+        
         this.centerIMG(this.perfume)
 
-
-        // Texto
-        //this.presentationText = this.add.rexBBCodeText(0, 0, 'PRESENTACIÓN [b]TÍTULO[/b]', { fontFamily: '"Roboto", "Roboto-Bold", serif', fontSize: 0, color: '#5656ee' });
-        //this.centerIMG(this.presentationText)
-
-        this.textButton = new TextButton({
-            game:this.game,
-            text: 'SIGUIENTE',
-            view:this.view,
-            x:100,
-            y:100,
-            width:219,
-            height:168,
-            spriteName : 'bgButton',
-            
-        })
-
-        var nineSlice = this.game.make.nineslice({
-            x: 200,
-            y: 500,
-            key: 'splash',
-            // frame: '',
+        this.leftButton = this.add.image(0, 0, 'goBack_button').setOrigin(0, 0).setInteractive();
+        this.rightButton = this.add.image(0, 0, 'continue_button').setOrigin(0, 0).setInteractive();
         
-            // width: 256,
-            // height: 256,
-            // leftWidth: 10,
-            // rightWidth: 10,
-            // topHeight: 0,
-            // bottomHeight: 0,
+        this.view.add(this.leftButton)
+        this.view.add(this.rightButton)
+
+        const offset = 62
+        this.leftButton.x = offset
+        this.leftButton.y = Screen.H - this.leftButton.height - offset
+
+        this.rightButton.x = Screen.W - this.rightButton.width - offset
+        this.rightButton.y = Screen.H - this.rightButton.height - offset      
         
-            // angle: 0,
-            // alpha: 1,
-            // scale : {
-            //    x: 1,
-            //    y: 1
-            //},
-            // origin: {x: 0.5, y: 0.5},
-        
-            add: true
+        this.rightButton.on('pointerdown', function (pointer)
+        {
+            that.globalevents.notify(GlobalEvents.ON_REQUEST_NEW_NODE, {requestedNodeID:Constants.PRESENTATION_2});
         });
         
-        //console.log(`this.textButton.displayWidth:${this.textButton.width()}`)
-        this.centerIMG(this.textButton)
-
         this.game.input.on('gameobjectdown', (pointer, button) =>
         {
             if( button.name == "perfume"){

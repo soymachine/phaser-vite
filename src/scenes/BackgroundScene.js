@@ -1,5 +1,5 @@
 import Constants from '../helpers/Constants.js';
-import GlobalEvents from '../globalevents.js';
+import GlobalEvents from '../core/GlobalEvents.js';
 
 
 class BackgroundScene extends Phaser.Scene

@@ -7,7 +7,7 @@ export function setText(field, fontSizeOriginal, text, width, height) {
 
     // Set the field's font size back to it's original value before setting the new text.
     field.fontSize = field['defaultFontSize'];
-    console.log(`field.fontSize:${field.fontSize}`)
+    //console.log(`field.fontSize:${field.fontSize}`)
 
     // If word wrap is set, then use the word wrap width as the bounds' width instead.
     if (field.wordWrap) {
@@ -29,8 +29,23 @@ export function setText(field, fontSizeOriginal, text, width, height) {
             //console.log("substract font size?")
         }
 
-        console.log(`fontsize FINAL:${size}`)
+        //console.log(`fontsize FINAL:${size}`)
+    }
+}
+
+export function fitTextInto(scene, str, maxW, maxH, options){
+    
+    let size = Number(options.fontSize)
+    let presentationText =  scene.add.rexBBCodeText(0, 0, str, options)
+
+
+    while(presentationText.height > maxH){
+        presentationText.destroy()
+        size = size - 1
+        options.fontSize = size
+        presentationText =  scene.add.rexBBCodeText(0, 0, str, options)
+        // console.log("Entramos aqui options.fontSize " + size)
     }
 
-
+    return presentationText
 }

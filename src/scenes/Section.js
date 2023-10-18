@@ -1,6 +1,6 @@
 import Constants from '../helpers/Constants.js'
 import Screen from '../helpers/Screen.js';
-import GlobalEvents from '../globalevents.js';
+import GlobalEvents from '../core/GlobalEvents.js';
 
 class Section extends Phaser.Scene
 {
@@ -45,6 +45,10 @@ class Section extends Phaser.Scene
     setPosition(newPosition)
     {
         this.position = newPosition
+    }
+
+    gotoNode(nodeID){
+        this.globalevents.notify(GlobalEvents.ON_REQUEST_NEW_NODE, {requestedNodeID:nodeID});
     }
 
     show()
@@ -117,7 +121,6 @@ class Section extends Phaser.Scene
     }
 
     centerIMG(img){
-        
         const imageW = img.displayWidth
         const imageH = img.displayHeight
         
